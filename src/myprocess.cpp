@@ -114,7 +114,7 @@ void MyProcess::genericRead(QByteArray buffer)
     QByteArray ba = remaining_output + buffer;
     int start = 0;
     int from_pos = 0;
-    int pos = canReadLine(ba, from_pos);
+    int pos = isLine(ba, from_pos);
 
     //qDebug("MyProcess::read: pos: %d", pos);
     while (pos > -1) {
@@ -132,18 +132,18 @@ void MyProcess::genericRead(QByteArray buffer)
 
         emit lineAvailable(line);
 
-        pos = canReadLine(ba, from_pos);
+        pos = isLine(ba, from_pos);
     }
 
     remaining_output = ba.mid(from_pos);
 }
 
-int MyProcess::canReadLine(const QByteArray &ba, int from)
+int MyProcess::isLine(const QByteArray &ba, int from)
 {
     int pos1 = ba.indexOf('\n', from);
     int pos2 = ba.indexOf('\r', from);
 
-    //qDebug("MyProcess::canReadLine: pos2: %d", pos2);
+    //qDebug("MyProcess::isLine: pos2: %d", pos2);
 
     if ((pos1 == -1) && (pos2 == -1)) return -1;
 

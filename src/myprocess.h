@@ -64,7 +64,7 @@ protected slots:
 protected:
     //! Return true if it's possible to read an entire line.
     /*! @param from specifies the position to begin. */
-    int canReadLine(const QByteArray &ba, int from = 0);
+    int isLine(const QByteArray &ba, int from = 0);
     //! Called from readStdOut() and readTmpFile() to do all the work
     void genericRead(QByteArray buffer);
 
