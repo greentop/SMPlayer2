@@ -1157,6 +1157,20 @@ void Core::screenshots()
     }
 }
 
+void Core::screenshotall()
+{
+    qDebug("Core::screenshotall");
+
+    if ((!pref->screenshot_directory.isEmpty()) &&
+            (QFileInfo(pref->screenshot_directory).isDir())) {
+        tellmp("screenshot 0 1");
+        qDebug("Core::screenshotall: taken screenshot");
+    } else {
+        qDebug("Core::screenshotall: error: directory for screenshots not valid");
+        emit showMessage(tr("Screenshot NOT taken, folder not configured"));
+    }
+}
+
 void Core::processFinished()
 {
     qDebug("Core::processFinished");
@@ -1993,14 +2007,14 @@ void Core::startMplayer(QString file, double seek)
         proc->addArgument(pref->mplayer_additional_video_filters);
     }
 
-    // Filters for subtitles on screenshots
+    // OSD autoscale
     if ((screenshot_enabled) && (pref->subtitles_on_screenshots)) {
         if (pref->use_ass_subtitles) {
-            proc->addArgument("-vf-add");
-            proc->addArgument("ass");
+            proc->addArgument("-subfont-autoscale");
+            proc->addArgument("0");
         } else {
-            proc->addArgument("-vf-add");
-            proc->addArgument("expand=osd=1");
+            proc->addArgument("-subfont-autoscale");
+            proc->addArgument("0");
         }
     }
 
@@ -2024,10 +2038,10 @@ void Core::startMplayer(QString file, double seek)
         proc->addArgument("mirror");
     }
 
-    // Screenshots
+    // OSD autoscale to half
     if (screenshot_enabled)	{
-        proc->addArgument("-vf-add");
-        proc->addArgument("screenshot");
+        proc->addArgument("-subfont-osd-scale");
+        proc->addArgument("50");
     }
 
 #ifndef Q_OS_WIN
@@ -2990,8 +3004,6 @@ void Core::changeSubVisibility(bool visible)
         displayMessage(tr("Subtitles on"));
     else
         displayMessage(tr("Subtitles off"));
-
-    updateWidgets();
 }
 
 // Audio equalizer functions
@@ -3212,8 +3224,6 @@ void Core::changeSubtitle(int ID)
         } else {
             qWarning("Core::changeSubtitle: subtitle list is empty!");
         }
-
-        changeSubVisibility(true);
     }
 
     updateWidgets();

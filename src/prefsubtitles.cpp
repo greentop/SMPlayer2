@@ -509,9 +509,8 @@ void PrefSubtitles::createHelp()
                     "automatically."));
 
     setWhatsThis(subtitles_on_screeshots_check,
-                 tr("Include subtitles on screenshots"),
-                 tr("If this option is checked, the subtitles will appear in the "
-                    "screenshots. <b>Note:</b> it may cause some troubles sometimes."));
+                 tr("Reduce OSD size by half"),
+                 tr("This option should reduce the on-screen display size by half."));
 
     addSectionTitle(tr("Font"));
 

@@ -103,6 +103,7 @@ public slots:
     void frameStep();
     void screenshot();	//!< Take a screenshot of current frame
     void screenshots();	//!< Start/stop taking screenshot of each frame
+    void screenshotall(); //!< Take a screenshot of current frame including subtitles
 
     //! Public restart, for the GUI.
     void restart();

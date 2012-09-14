@@ -211,7 +211,7 @@
        <item>
         <widget class="QCheckBox" name="subtitles_on_screeshots_check">
          <property name="text">
-          <string>&amp;Include subtitles on screenshots</string>
+          <string>Reduce OSD s&amp;ize by half</string>
          </property>
         </widget>
        </item>
