@@ -6768,7 +6768,7 @@ For translators: don&apos;t translate this text, it will be replaced with anothe
     </message>
     <message>
         <location filename="../prefsubtitles.ui" line="214"/>
-        <source>&amp;Include subtitles on screenshots</source>
+        <source>Reduce OSD s&amp;ize by half</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -6798,7 +6798,7 @@ For translators: don&apos;t translate this text, it will be replaced with anothe
     </message>
     <message>
         <location filename="../prefsubtitles.cpp" line="457"/>
-        <source>Include subtitles on screenshots</source>
+        <source>Reduce OSD size by half</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7252,7 +7252,7 @@ For translators: don&apos;t translate this text, it will be replaced with anothe
     </message>
     <message>
         <location filename="../prefsubtitles.cpp" line="458"/>
-        <source>If this option is checked, the subtitles will appear in the screenshots. &lt;b&gt;Note:&lt;/b&gt; it may cause some troubles sometimes.</source>
+        <source>This option should reduce the on-screen display size by half. &lt;b&gt;Note:&lt;/b&gt; this option does "-subfont-autoscale 0 -subfont-osd-scale 50"</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
