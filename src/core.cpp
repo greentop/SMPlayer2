@@ -2012,9 +2012,13 @@ void Core::startMplayer(QString file, double seek)
         if (pref->use_ass_subtitles) {
             proc->addArgument("-subfont-autoscale");
             proc->addArgument("0");
+            proc->addArgument("-subfont-osd-scale");
+            proc->addArgument("50");
         } else {
             proc->addArgument("-subfont-autoscale");
             proc->addArgument("0");
+            proc->addArgument("-subfont-osd-scale");
+            proc->addArgument("50");
         }
     }
 
@@ -2038,10 +2042,10 @@ void Core::startMplayer(QString file, double seek)
         proc->addArgument("mirror");
     }
 
-    // OSD autoscale to half
+    // Screenshots
     if (screenshot_enabled)	{
-        proc->addArgument("-subfont-osd-scale");
-        proc->addArgument("50");
+        proc->addArgument("-vf-add");
+        proc->addArgument("screenshot");
     }
 
 #ifndef Q_OS_WIN
