@@ -666,6 +666,11 @@ void BaseGui::createActions()
     connect(screenshotAct, SIGNAL(triggered()),
             core, SLOT(screenshot()));
 
+    // Single screenshot with subtitles
+    screenshotallAct = new MyAction(QKeySequence("Shift+C"), this, "screenshot_as_seen");
+    connect(screenshotallAct, SIGNAL(triggered()),
+            core, SLOT(screenshotall()));
+
     // Multiple screenshots
     screenshotsAct = new MyAction(QKeySequence("Shift+D"), this, "multiple_screenshots");
     connect(screenshotsAct, SIGNAL(triggered()),
@@ -1277,6 +1282,7 @@ void BaseGui::setActionsEnabled(bool b)
     // Menu Video
     videoEqualizerAct->setEnabled(b);
     screenshotAct->setEnabled(b);
+    screenshotallAct->setEnabled(b);
     screenshotsAct->setEnabled(b);
     flipAct->setEnabled(b);
     mirrorAct->setEnabled(b);
@@ -1387,6 +1393,7 @@ void BaseGui::enableActionsOnPlaying()
                                 (QFileInfo(pref->screenshot_directory).isDir()));
 
     screenshotAct->setEnabled(screenshots_enabled);
+    screenshotallAct->setEnabled(screenshots_enabled);
     screenshotsAct->setEnabled(screenshots_enabled);
 
     // Disable the compact action if not using video window
@@ -1415,6 +1422,7 @@ void BaseGui::enableActionsOnPlaying()
     if (core->mdat.novideo) {
         videoEqualizerAct->setEnabled(false);
         screenshotAct->setEnabled(false);
+	screenshotallAct->setEnabled(false);
         screenshotsAct->setEnabled(false);
         flipAct->setEnabled(false);
         mirrorAct->setEnabled(false);
@@ -1600,6 +1608,7 @@ void BaseGui::retranslateStrings()
     compactAct->change(Images::icon("compact"), tr("&Compact mode"));
     videoEqualizerAct->change(Images::icon("equalizer"), tr("&Equalizer"));
     screenshotAct->change(Images::icon("screenshot"), tr("&Screenshot"));
+    screenshotallAct->change(Images::icon("screenshotall"), tr("Screenshot scaled"));
     screenshotsAct->change(Images::icon("screenshots"), tr("Start/stop takin&g screenshots"));
     flipAct->change(Images::icon("flip"), tr("Fli&p image"));
     mirrorAct->change(Images::icon("mirror"), tr("Mirr&or image"));
@@ -2402,6 +2411,7 @@ void BaseGui::createMenus()
     videoMenu->addSeparator();
     videoMenu->addAction(videoEqualizerAct);
     videoMenu->addAction(screenshotAct);
+    videoMenu->addAction(screenshotallAct);
     videoMenu->addAction(screenshotsAct);
 
     // Ontop submenu
@@ -3309,12 +3319,7 @@ void BaseGui::updateWidgets()
     qDebug("BaseGui::updateWidgets");
 
     // Subtitles menu
-    if (pref->sub_visibility) {
-        subtitleTrackGroup->setChecked(core->mset.current_sub_id);
-    }
-    else {
-        subtitleTrackGroup->setChecked(MediaSettings::SubNone);
-    }
+    subtitleTrackGroup->setChecked(core->mset.current_sub_id);
 
     // Disable the unload subs action if there's no external subtitles
     unloadSubsAct->setEnabled(!core->mset.external_subtitles.isEmpty());

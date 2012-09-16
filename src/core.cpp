@@ -1157,6 +1157,20 @@ void Core::screenshots()
     }
 }
 
+void Core::screenshotall()
+{
+    qDebug("Core::screenshotall");
+
+    if ((!pref->screenshot_directory.isEmpty()) &&
+            (QFileInfo(pref->screenshot_directory).isDir())) {
+        tellmp("screenshot 0 1");
+        qDebug("Core::screenshotall: taken screenshot");
+    } else {
+        qDebug("Core::screenshotall: error: directory for screenshots not valid");
+        emit showMessage(tr("Screenshot NOT taken, folder not configured"));
+    }
+}
+
 void Core::processFinished()
 {
     qDebug("Core::processFinished");
@@ -2990,8 +3004,6 @@ void Core::changeSubVisibility(bool visible)
         displayMessage(tr("Subtitles on"));
     else
         displayMessage(tr("Subtitles off"));
-
-    updateWidgets();
 }
 
 // Audio equalizer functions
@@ -3212,8 +3224,6 @@ void Core::changeSubtitle(int ID)
         } else {
             qWarning("Core::changeSubtitle: subtitle list is empty!");
         }
-
-        changeSubVisibility(true);
     }
 
     updateWidgets();

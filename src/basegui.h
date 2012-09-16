@@ -373,6 +373,7 @@ protected:
     MyAction *compactAct;
     MyAction *videoEqualizerAct;
     MyAction *screenshotAct;
+    MyAction *screenshotallAct;
     MyAction *screenshotsAct;
     MyAction *flipAct;
     MyAction *mirrorAct;
